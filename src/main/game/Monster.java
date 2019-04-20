@@ -9,6 +9,9 @@ public class Monster extends Entity {
     this.name=name;
     this.health=health;
     this.damage=damage;
+    if(Map.boss){
+        this.damage/=2;
+    }
     this.player=player;
     this.maxHealth=health;
     }
@@ -26,9 +29,9 @@ public class Monster extends Entity {
     //halálakor tapasztalatpontot ad a játékosnak
     void die(){
         if(Map.boss){
-            player.exp+=player.level*65;
+            player.exp+=player.level*565;
         }else {
-            player.exp += player.level * 30;
+            player.exp += player.level * 330;
         }
         player.levelUp();
     }
