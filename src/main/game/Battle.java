@@ -310,6 +310,7 @@ public class Battle extends Canvas {
     private void escape() {
 
         map.defeated=false;
+        Sounds.stopMusic ();
         endBattle ();
     }
 
