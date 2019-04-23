@@ -56,7 +56,7 @@ public class Battle extends Canvas {
         for (int i = 0; i < monster.length; i++) {
             System.out.println(monster[i] + ", ");
         }
-        enemy = new Monster(monster[1], Integer.parseInt(monster[2]), Integer.parseInt(monster[3]), player);
+        enemy = new Monster(monster[1], Integer.parseInt(monster[2]), Integer.parseInt(monster[3]),monster[4], player);
         Sounds.playMusic (music);
 
 
@@ -76,7 +76,7 @@ public class Battle extends Canvas {
         g.fillRect (0,0,900,900);
         BufferedImage sprite;
         try {
-            sprite=Sprite.resize(ImageIO.read(new File("src/resources/sprites/"+enemy.name+".png")),450,500);
+            sprite=Sprite.resize(ImageIO.read(new File("src/resources/sprites/"+enemy.img)),450,500);
         } catch (IOException e) {
             System.out.println(e.getMessage());
             sprite=null;
@@ -310,7 +310,6 @@ public class Battle extends Canvas {
     private void escape() {
 
         map.defeated=false;
-        Sounds.stopMusic ();
         endBattle ();
     }
 

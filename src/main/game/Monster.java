@@ -5,10 +5,12 @@ import java.util.Random;
 public class Monster extends Entity {
     private int damage; //szörny ereje
     private Player player; //szörny ellenfele (játékos)
-    public Monster(String name, int health, int damage, Player player){
+    public String img; //szörny képe
+    public Monster(String name, int health, int damage, String img, Player player){
     this.name=name;
     this.health=health;
     this.damage=damage;
+    this.img=img;
     if(Map.boss){
         this.damage/=2;
     }

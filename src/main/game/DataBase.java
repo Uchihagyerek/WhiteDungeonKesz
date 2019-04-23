@@ -49,11 +49,12 @@ public class DataBase {
             ResultSet rs = stm.executeQuery("SELECT * FROM monsters WHERE boss="+boss);
 
             while (rs.next()) {
-                monster = new String[4];
+                monster = new String[5];
                 monster[0] = rs.getString("id");
                 monster[1] = rs.getString("name");
                 monster[2] = rs.getString("health");
                 monster[3] = rs.getString("damage");
+                monster[4] = rs.getString ("img");
 
                 monsters.add(monster);
             }
