@@ -116,11 +116,11 @@ public class Map extends Canvas {
                     if(!player.cheat){
                         player.damage*=20;
                         player.cheat=true;
-                        System.out.println ("Cheat mode activated");
+                        System.out.println ("Csalás mód bekapcsolva");
                     }else{
                         player.damage/=20;
                         player.cheat=false;
-                        System.out.println ("Cheat mode deactivated");
+                        System.out.println ("Csalás mód kikapcsolva");
                     }
                         break;
 
@@ -245,7 +245,7 @@ public class Map extends Canvas {
             g.setColor (Color.YELLOW);
             g.fillRect (750, 500, 100, 50);
             map[myY][myX] = 1;
-            System.out.println ("You found treasure!");
+            System.out.println ("Kincset találtál!");
             Sounds.playSound ("loot.wav");
             treasureRoom ();
         }
@@ -285,7 +285,7 @@ public class Map extends Canvas {
     //kezeli a főellenség szoba állapotát
     private void setBossStatus(){
         if (! defeated) {
-            System.out.println ("Boss battle starts");
+            System.out.println ("Főellenség harc veszi kezdetét!");
             startBattle ();
         } else {
             map[myY][myX] = 1;
@@ -293,7 +293,7 @@ public class Map extends Canvas {
             if (levelCount < 8)
                 generateMap ();
             else {
-                JOptionPane.showMessageDialog (frame, "You Win!");
+                JOptionPane.showMessageDialog (frame, "Nyertél!");
 
                 DataBase.setScore (player.points, player.name);
                 frame.dispose ();
@@ -310,7 +310,7 @@ public class Map extends Canvas {
         if (! defeated && ! started) {
 
 
-            System.out.println ("You encountered a monster!");
+            System.out.println ("Szörnnyel találkoztál!");
             startBattle ();
 
 
@@ -437,16 +437,16 @@ public class Map extends Canvas {
             case 1:
                 player.maxHealth += value;
                 player.health += value;
-                System.out.println ("Your health has been increased by " + value);
+                System.out.println ("Az életerőd ennyivel növekedett: " + value);
                 break;
             case 2:
                 player.maxMana += value;
                 player.mana += value;
-                System.out.println ("Your mana has been increased by " + value);
+                System.out.println ("A varázserőd ennyivel növekedett: " + value);
                 break;
             case 3:
                 player.damage += value;
-                System.out.println ("Your damage has been increased by " + value);
+                System.out.println ("A harci erőd ennyivel növekedett: " + value);
                 break;
 
         }

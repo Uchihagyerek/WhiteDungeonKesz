@@ -139,7 +139,7 @@ public class Battle extends Canvas {
         playerHealth.setMaximum(player.maxHealth);
         playerHealth.setValue(player.health);
         playerHealth.setBounds(500,750,350,50);
-        playerHealth.setString("Health: "+player.health+"/"+player.maxHealth);
+        playerHealth.setString("Életerő: "+player.health+"/"+player.maxHealth);
         playerHealth.setStringPainted(true);
         playerHealth.setForeground(Color.GREEN);
 
@@ -147,7 +147,7 @@ public class Battle extends Canvas {
         playerMana.setMaximum (player.maxMana);
         playerMana.setValue (player.mana);
         playerMana.setBounds (500,800,350,50);
-        playerMana.setString ("Mana: "+player.mana+"/"+player.maxMana);
+        playerMana.setString ("Varázserő: "+player.mana+"/"+player.maxMana);
         playerMana.setStringPainted (true);
         playerMana.setForeground (Color.BLUE);
 
@@ -155,7 +155,7 @@ public class Battle extends Canvas {
         playerExp.setMaximum(player.remainingExp);
         playerExp.setValue(player.exp);
         playerExp.setBounds(0,880,900,20);
-        playerExp.setString("Exp: "+player.exp+"/"+player.remainingExp);
+        playerExp.setString("Tp: "+player.exp+"/"+player.remainingExp);
         playerExp.setStringPainted(true);
         playerExp.setForeground(Color.magenta);
 
@@ -216,6 +216,7 @@ public class Battle extends Canvas {
         }else {
             enemy.health -= player.attack ();
             Sounds.playSound ("sword.wav");
+            System.out.println ("TÁMADÁS!");
         }
 
         checkKill();
@@ -228,9 +229,10 @@ public class Battle extends Canvas {
             attackBtn (true);
             cooldown = 3;
             player.mana-=20;
+            System.out.println ("Tűzgolyót használtál!");
         }else{
 
-            System.out.println ("Nincs elég mana!");
+            System.out.println ("Nincs elég varázserőd!");
         }
 
     }
@@ -279,7 +281,7 @@ public class Battle extends Canvas {
         playerHealth.setValue(player.health);
         playerHealth.setString("Életerő: "+player.health+"/"+player.maxHealth);
         playerMana.setValue (player.mana);
-        playerMana.setString("Mana: "+player.mana+"/"+player.maxMana);
+        playerMana.setString("Varázserő: "+player.mana+"/"+player.maxMana);
         enemyHealth.setValue(enemy.health);
         enemyHealth.setString(enemy.name+": "+enemy.health+"/"+enemy.maxHealth);
     }
