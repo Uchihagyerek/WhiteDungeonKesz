@@ -74,6 +74,7 @@ public class Map extends Canvas {
             public void actionPerformed (ActionEvent e) {
                 player.points -= 50;
                 System.out.println (player.points);
+
             }
         });
         timer.start ();
@@ -85,6 +86,8 @@ public class Map extends Canvas {
                 new game.Point (- 1, 0)
         };
     }
+
+
 
     //kezeli a mozgást
     public void moveIt (KeyEvent evt) {
@@ -243,11 +246,14 @@ public class Map extends Canvas {
         }
         if (map[myY][myX] == 3) {
             g.setColor (Color.YELLOW);
-            g.fillRect (750, 500, 100, 50);
+            g.fillRect (300, 40, 350, 50);
             map[myY][myX] = 1;
+            g.setColor (Color.BLACK);
+            g.setFont (new Font(Font.SANS_SERIF, Font.BOLD,15));
+            g.drawString ("Kincset találtál!",425,50);
             System.out.println ("Kincset találtál!");
             Sounds.playSound ("loot.wav");
-            treasureRoom ();
+            treasureRoom (g);
         }
         boss = bossCheck ();
         if (boss) {
@@ -259,6 +265,11 @@ public class Map extends Canvas {
         g.fillRect ((startY * roomSize) + 7, ((startX) * roomSize) + 7, roomSize2, roomSize2);
         g.setColor (Color.GREEN);
         g.fillOval ((myX * roomSize) + 15, (myY * roomSize) + 15, 20, 20);
+
+
+        g.setColor (Color.CYAN);
+
+        g.drawString ("Pontok: "+player.points, 400,10);
 
 
         ig.drawImage (image, 0, 0, this);
@@ -428,7 +439,7 @@ public class Map extends Canvas {
     }
 
     //kezeli a kincses szobákat
-    private void treasureRoom () {
+    private void treasureRoom (Graphics g) {
         Treasure treasure = new Treasure ();
         int type = treasure.getType ();
         int value = treasure.getValue ();
@@ -438,15 +449,18 @@ public class Map extends Canvas {
                 player.maxHealth += value;
                 player.health += value;
                 System.out.println ("Az életerőd ennyivel növekedett: " + value);
+                g.drawString ("Az életerőd ennyivel növekedett: " + value, 350,70);
                 break;
             case 2:
                 player.maxMana += value;
                 player.mana += value;
                 System.out.println ("A varázserőd ennyivel növekedett: " + value);
+                g.drawString ("Az varázserőd ennyivel növekedett: " + value, 350,70);
                 break;
             case 3:
                 player.damage += value;
                 System.out.println ("A harci erőd ennyivel növekedett: " + value);
+                g.drawString ("Az harci erőd ennyivel növekedett: " + value, 350,70);
                 break;
 
         }

@@ -24,6 +24,7 @@ public class Battle extends Canvas {
     private JButton escape; //menekülés gomb
     private Player player; //jelenlegi játékos
     private boolean boss; //eldöntendő: Főellenség-e, vagy nem
+    private String warning=""; //eldöntendő: van-e valamilyen figyelmeztetés
 
 
     /**
@@ -81,10 +82,27 @@ public class Battle extends Canvas {
             System.out.println(e.getMessage());
             sprite=null;
         }
+
+        checkWarnings (warning,g);
         ig.drawImage(image, 0,0,this);
 
         ig.drawImage(sprite,sprite.getWidth()/2,20,null);
 
+    }
+
+    private void checkWarnings(String warning, Graphics g){
+        g.setColor (Color.RED);
+        switch (warning){
+            case "mana":
+                g.drawString ("Nincs elég varázserőd!", 200,700);
+                break;
+            case "potion":
+                g.drawString ("Nincs elég varázsitalod!", 200,700);
+                break;
+                default:
+                    break;
+        }
+        this.warning="";
     }
 
     //beállít minden gombot, progress bar-t
@@ -233,6 +251,8 @@ public class Battle extends Canvas {
         }else{
 
             System.out.println ("Nincs elég varázserőd!");
+            warning="mana";
+            repaint ();
         }
 
     }
@@ -284,6 +304,7 @@ public class Battle extends Canvas {
         playerMana.setString("Varázserő: "+player.mana+"/"+player.maxMana);
         enemyHealth.setValue(enemy.health);
         enemyHealth.setString(enemy.name+": "+enemy.health+"/"+enemy.maxHealth);
+        repaint ();
     }
 
     private void potionBtn(){
@@ -304,7 +325,9 @@ public class Battle extends Canvas {
 
             player.potionsCount--;
         }else{
+            warning="potion";
             System.out.println ("Nincs több varázsitalod!");
+            repaint ();
         }
     }
 
@@ -312,6 +335,7 @@ public class Battle extends Canvas {
     private void escape() {
 
         map.defeated=false;
+        Sounds.stopMusic ();
         endBattle ();
     }
 
